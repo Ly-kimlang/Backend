@@ -1,11 +1,13 @@
 package com.example.demo;
+
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
-import  jakarta.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import java.util.List;
+
 @Entity
-@Table(name ="students")
-public class Student{
+@Table(name = "students")
+public class Student {
+
     @ManyToMany
     @JoinTable(
             name = "student_courses",
@@ -17,26 +19,27 @@ public class Student{
     @OneToMany(mappedBy = "student")
     private List<Order> orders;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name ="profile_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id")
     private Profile profile;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  int id;
+    private int id;
 
-    @NotBlank(message="Name cannot be empty!")
+    @NotBlank(message = "Name cannot be empty!")
     private String name;
 
-    @Min(value=18, message="Age must be at least 18!")
-    @Max(value=100, message="Age cannot exceed 100!")
+    @Min(value = 18, message = "Age must be at least 18!")
+    @Max(value = 100, message = "Age cannot exceed 100!")
     private int age;
 
-    @NotBlank(message ="Major cannot be empty!")
+    @NotBlank(message = "Major cannot be empty!")
     private String major;
-    public Student(){
 
+    public Student() {
     }
+
     public Profile getProfile() {
         return profile;
     }
@@ -44,12 +47,15 @@ public class Student{
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
-    public int getId(){
+
+    public int getId() {
         return id;
     }
-    public void setId(int id){
-        this.id=id;
+
+    public void setId(int id) {
+        this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -69,9 +75,11 @@ public class Student{
     public String getMajor() {
         return major;
     }
-    public void setMajor(String major){
-        this.major=major;
+
+    public void setMajor(String major) {
+        this.major = major;
     }
+
     public List<Course> getCourses() {
         return courses;
     }
@@ -80,4 +88,11 @@ public class Student{
         this.courses = courses;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }
